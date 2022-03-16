@@ -1,17 +1,24 @@
 package id.rofyfirm.pokemonapps.ui.detail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayoutMediator
 import id.rofyfirm.pokemonapps.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {
 
+    private val viewModel by lazy { ViewModelProvider(this).get(DetailViewModel::class.java) }
     private val binding by lazy { ActivityDetailBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        viewModel.titleBar.observe(this, Observer {
+            supportActionBar!!.title = it
+        })
 
         init()
         listener()

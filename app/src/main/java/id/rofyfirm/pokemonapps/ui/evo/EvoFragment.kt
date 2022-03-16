@@ -5,11 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import id.rofyfirm.pokemonapps.R
 import id.rofyfirm.pokemonapps.databinding.FragmentEvoBinding
+import id.rofyfirm.pokemonapps.ui.detail.DetailViewModel
 
 class EvoFragment : Fragment() {
 
+    private val viewModel by lazy { ViewModelProvider(requireActivity()).get(DetailViewModel::class.java) }
     private lateinit var binding: FragmentEvoBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -20,5 +23,7 @@ class EvoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.titleBar.postValue("Evolution")
     }
 }
