@@ -7,12 +7,15 @@ import id.rofyfirm.pokemonapps.network.response.SpeciesResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 import retrofit2.http.Url
 
 interface RequestApi {
 
     @GET("pokemon/")
-    suspend fun pokemonList(): Response<MainResponse>
+    suspend fun pokemonList(
+        @Query("limit") limit: Int?,
+    ): Response<MainResponse>
 
     @GET("pokemon/{id}")
     suspend fun pokemonDetail(
