@@ -8,7 +8,6 @@ class StatResponse {
     @SerializedName("forms") var forms: ArrayList<Forms>? = null
     @SerializedName("game_indices") var gameIndices: ArrayList<GameIndices>? = null
     @SerializedName("height") var height: Int? = null
-    @SerializedName("held_items") var heldItems: ArrayList<String>? = null
     @SerializedName("id") var id: Int? = null
     @SerializedName("is_default") var isDefault: Boolean? = null
     @SerializedName("location_area_encounters") var locationAreaEncounters : String? = null

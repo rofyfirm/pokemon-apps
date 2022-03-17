@@ -27,8 +27,8 @@
             android:layout_weight="5"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:lineSpacingExtra="4dp"
-            android:text="Nama Bengkel"/>
+            android:textAllCaps="true"
+            android:lineSpacingExtra="4dp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

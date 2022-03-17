@@ -8,5 +8,7 @@ class Repository(private val requestApi: RequestApi) {
 
     suspend fun fetchPokemonDetail(id: Int) = requestApi.pokemonDetail(id)
 
+    suspend fun fetchPokemonSpecies(id: Int) = requestApi.pokemonSpecies(id)
+
     suspend fun fetchPokemonEvo(id: Int) = requestApi.pokemonEvo(id)
 }

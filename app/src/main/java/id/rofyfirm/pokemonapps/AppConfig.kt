@@ -7,6 +7,7 @@ import id.rofyfirm.pokemonapps.network.repository.Repository
 import id.rofyfirm.pokemonapps.ui.evo.EvoViewModelFactory
 import id.rofyfirm.pokemonapps.ui.main.MainViewModelFactory
 import id.rofyfirm.pokemonapps.ui.stat.StatViewModelFactory
+import id.rofyfirm.pokemonapps.utils.ConnectivityInterceptor
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -21,7 +22,8 @@ class AppConfig: Application(), KodeinAware {
     override val kodein: Kodein = Kodein.lazy {
         import(androidXModule(this@AppConfig))
 
-        bind<RequestApi>() with singleton { ApiService.getClient() }
+        bind() from singleton { ConnectivityInterceptor(instance()) }
+        bind<RequestApi>() with singleton { ApiService.getClient(instance()) }
 
         bind() from singleton { Repository(instance()) }
         bind() from provider { MainViewModelFactory(instance())}

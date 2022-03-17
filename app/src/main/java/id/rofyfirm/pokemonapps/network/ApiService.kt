@@ -1,6 +1,6 @@
 package id.rofyfirm.pokemonapps.network
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import id.rofyfirm.pokemonapps.utils.ConnectivityInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -8,7 +8,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiService {
 
-    fun getClient(): RequestApi{
+    private fun connectivity(connectivityInterceptor: ConnectivityInterceptor): OkHttpClient {
+        return OkHttpClient.Builder().addInterceptor(connectivityInterceptor).build()
+    }
+
+    fun getClient(connection: ConnectivityInterceptor): RequestApi{
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
 
@@ -24,6 +28,7 @@ object ApiService {
             .baseUrl("https://pokeapi.co/api/v2/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
+            .client(connectivity(connection))
             .build()
             .create(RequestApi::class.java)
     }

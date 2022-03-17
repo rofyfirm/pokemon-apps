@@ -4,12 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import id.rofyfirm.pokemonapps.network.repository.Repository
-import id.rofyfirm.pokemonapps.network.response.StatResponse
+import id.rofyfirm.pokemonapps.network.response.EvoResponse
 import kotlinx.coroutines.launch
 
 class EvoViewModel(private val repository: Repository): ViewModel() {
 
-    private val evoResponse: MutableLiveData<StatResponse> = MutableLiveData()
+    val evoResponse: MutableLiveData<EvoResponse> = MutableLiveData()
 
     fun fetch(id: Int) = viewModelScope.launch {
         val response = repository.fetchPokemonEvo(id)

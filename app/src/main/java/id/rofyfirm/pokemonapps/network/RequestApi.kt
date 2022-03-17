@@ -1,7 +1,9 @@
 package id.rofyfirm.pokemonapps.network
 
+import id.rofyfirm.pokemonapps.network.response.EvoResponse
 import id.rofyfirm.pokemonapps.network.response.StatResponse
 import id.rofyfirm.pokemonapps.network.response.MainResponse
+import id.rofyfirm.pokemonapps.network.response.SpeciesResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,8 +18,13 @@ interface RequestApi {
         @Path("id") id: Int?,
     ): Response<StatResponse>
 
-    @GET("pokemon/{id}")
+    @GET("pokemon-species/{id}")
+    suspend fun pokemonSpecies(
+        @Path("id") id: Int?,
+    ): Response<SpeciesResponse>
+
+    @GET("evolution-chain/{id}")
     suspend fun pokemonEvo(
         @Path("id") id: Int?,
-    ): Response<StatResponse>
+    ): Response<EvoResponse>
 }
