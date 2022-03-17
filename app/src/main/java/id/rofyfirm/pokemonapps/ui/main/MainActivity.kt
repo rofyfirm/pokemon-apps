@@ -1,19 +1,22 @@
 package id.rofyfirm.pokemonapps.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.rofyfirm.pokemonapps.databinding.ActivityMainBinding
-import id.rofyfirm.pokemonapps.network.ApiService
 import id.rofyfirm.pokemonapps.network.response.MainResponse
-import timber.log.Timber
+import id.rofyfirm.pokemonapps.ui.detail.DetailActivity
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), KodeinAware {
 
-    private val apiService by lazy { ApiService.getClient() }
+    override val kodein by kodein()
+    private val viewModelFactory: MainViewModelFactory by instance()
     private lateinit var viewModel: MainViewModel
-    private lateinit var viewModelFactory: MainViewModelFactory
     private lateinit var mainAdapter: MainAdapter
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
@@ -33,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     private fun init(){
         mainAdapter = MainAdapter(arrayListOf(), object: MainAdapter.OnAdapterListener{
             override fun OnClick(result: MainResponse.Results) {
-
+                startActivity(Intent(this@MainActivity, DetailActivity::class.java))
             }
         })
 
@@ -42,10 +45,9 @@ class MainActivity : AppCompatActivity() {
             adapter = mainAdapter
         }
 
-        viewModelFactory = MainViewModelFactory(apiService)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-        viewModel.response.observe(this) {
+        viewModel.mainResponse.observe(this) {
            mainAdapter.setData(it.results!!)
         }
     }

@@ -16,10 +16,6 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        viewModel.titleBar.observe(this) {
-            supportActionBar!!.title = it
-        }
-
         init()
         listener()
     }

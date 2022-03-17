@@ -4,18 +4,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import id.rofyfirm.pokemonapps.network.RequestApi
+import id.rofyfirm.pokemonapps.network.repository.Repository
 import id.rofyfirm.pokemonapps.network.response.MainResponse
 import kotlinx.coroutines.launch
 
-class MainViewModel(val requestApi: RequestApi): ViewModel() {
+class MainViewModel(val repository: Repository): ViewModel() {
 
-    val response: MutableLiveData<MainResponse> = MutableLiveData()
+    val mainResponse: MutableLiveData<MainResponse> = MutableLiveData()
 
     init {
         fetch()
     }
 
     fun fetch() = viewModelScope.launch {
-        response.value = requestApi.pokemonList().body()
+        val response = repository.fetchPokemonList()
+        mainResponse.value = response.body()
     }
 }
