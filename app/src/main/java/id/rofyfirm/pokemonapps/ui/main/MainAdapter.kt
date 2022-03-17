@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import id.rofyfirm.pokemonapps.databinding.ItemMainBinding
+import id.rofyfirm.pokemonapps.db.pres.MainEntity
 import id.rofyfirm.pokemonapps.network.response.MainResponse
 
 class MainAdapter(
-    val results: ArrayList<MainResponse.Results>,
+    val results: ArrayList<MainEntity>,
     val listener: OnAdapterListener): RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,7 +34,7 @@ class MainAdapter(
         fun OnClick(id: Int)
     }
 
-    fun setData(data: List<MainResponse.Results>){
+    fun setData(data: List<MainEntity>){
         results.clear()
         results.addAll(data)
         notifyDataSetChanged()

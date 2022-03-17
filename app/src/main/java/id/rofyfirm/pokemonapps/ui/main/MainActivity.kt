@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.rofyfirm.pokemonapps.databinding.ActivityMainBinding
-import id.rofyfirm.pokemonapps.network.response.MainResponse
 import id.rofyfirm.pokemonapps.ui.detail.DetailActivity
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -50,8 +49,8 @@ class MainActivity : AppCompatActivity(), KodeinAware {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-        viewModel.mainResponse.observe(this) {
-           mainAdapter.setData(it.results!!)
+        viewModel.main.observe(this) {
+           mainAdapter.setData(it)
         }
     }
 
