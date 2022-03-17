@@ -6,10 +6,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayoutMediator
 import id.rofyfirm.pokemonapps.databinding.ActivityDetailBinding
+import id.rofyfirm.pokemonapps.ui.stat.StatViewModel
+import id.rofyfirm.pokemonapps.ui.stat.StatViewModelFactory
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity(), KodeinAware {
 
-    private val viewModel by lazy { ViewModelProvider(this).get(DetailViewModel::class.java) }
+    override val kodein by kodein()
+    private val statViewModelFactory: StatViewModelFactory by instance()
     private val binding by lazy { ActivityDetailBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +23,7 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         init()
-        listener()
+        initViewModel()
     }
 
     private fun init(){
@@ -29,7 +35,7 @@ class DetailActivity : AppCompatActivity() {
         }.attach()
     }
 
-    private fun listener(){
-
+    private fun initViewModel(){
+        ViewModelProvider(this, statViewModelFactory)[StatViewModel::class.java]
     }
 }

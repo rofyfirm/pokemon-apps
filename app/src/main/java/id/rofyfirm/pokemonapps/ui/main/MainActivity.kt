@@ -35,8 +35,11 @@ class MainActivity : AppCompatActivity(), KodeinAware {
 
     private fun init(){
         mainAdapter = MainAdapter(arrayListOf(), object: MainAdapter.OnAdapterListener{
-            override fun OnClick(result: MainResponse.Results) {
-                startActivity(Intent(this@MainActivity, DetailActivity::class.java))
+            override fun OnClick(id: Int) {
+                startActivity(
+                    Intent(this@MainActivity, DetailActivity::class.java)
+                        .putExtra("id", id)
+                )
             }
         })
 

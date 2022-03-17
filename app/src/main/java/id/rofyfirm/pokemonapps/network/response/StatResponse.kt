@@ -2,7 +2,7 @@ package id.rofyfirm.pokemonapps.network.response
 
 import com.google.gson.annotations.SerializedName
 
-class DetailResponse {
+class StatResponse {
     @SerializedName("abilities") var abilities: ArrayList<Abilities>? = null
     @SerializedName("base_experience") var baseExperience: Int? = null
     @SerializedName("forms") var forms: ArrayList<Forms>? = null

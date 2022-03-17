@@ -6,13 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import id.rofyfirm.pokemonapps.R
 import id.rofyfirm.pokemonapps.databinding.FragmentStatBinding
-import id.rofyfirm.pokemonapps.ui.detail.DetailViewModel
 
 class StatFragment : Fragment() {
 
-    private val viewModel by lazy { ViewModelProvider(requireActivity()).get(DetailViewModel::class.java) }
     private lateinit var binding: FragmentStatBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

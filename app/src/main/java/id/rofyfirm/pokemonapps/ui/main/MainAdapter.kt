@@ -19,7 +19,7 @@ class MainAdapter(
         val result = results[position]
         holder.binding.name.text = result.name
         holder.binding.itemLayout.setOnClickListener {
-            listener.OnClick(result)
+            listener.OnClick(position+1)
         }
     }
 
@@ -30,7 +30,7 @@ class MainAdapter(
     class ViewHolder(val binding: ItemMainBinding): RecyclerView.ViewHolder(binding.root)
 
     interface OnAdapterListener{
-        fun OnClick(result: MainResponse.Results)
+        fun OnClick(id: Int)
     }
 
     fun setData(data: List<MainResponse.Results>){

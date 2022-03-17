@@ -5,6 +5,7 @@ import id.rofyfirm.pokemonapps.network.ApiService
 import id.rofyfirm.pokemonapps.network.RequestApi
 import id.rofyfirm.pokemonapps.network.repository.Repository
 import id.rofyfirm.pokemonapps.ui.main.MainViewModelFactory
+import id.rofyfirm.pokemonapps.ui.stat.StatViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -23,6 +24,7 @@ class AppConfig: Application(), KodeinAware {
 
         bind() from singleton { Repository(instance()) }
         bind() from provider { MainViewModelFactory(instance())}
+        bind() from provider { StatViewModelFactory(instance()) }
     }
 
     override fun onCreate() {

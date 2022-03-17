@@ -8,7 +8,7 @@ import id.rofyfirm.pokemonapps.network.repository.Repository
 import id.rofyfirm.pokemonapps.network.response.MainResponse
 import kotlinx.coroutines.launch
 
-class MainViewModel(val repository: Repository): ViewModel() {
+class MainViewModel(private val repository: Repository): ViewModel() {
 
     val mainResponse: MutableLiveData<MainResponse> = MutableLiveData()
 
