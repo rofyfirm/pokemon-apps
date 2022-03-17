@@ -43,6 +43,8 @@ class StatFragment : Fragment() {
         viewModel.fetchSpecies(id)
         viewModel.speciesResponse.observe(viewLifecycleOwner){
             binding.form.text = it.flavorTextEntries[0].flavorText
+
+            it.evolutionChain?.url?.let { it1 -> viewModel.savePreferences("evo", it1) }
         }
     }
 }

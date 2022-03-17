@@ -1,6 +1,7 @@
 package id.rofyfirm.pokemonapps
 
 import android.app.Application
+import id.rofyfirm.pokemonapps.db.pref.Preferences
 import id.rofyfirm.pokemonapps.network.ApiService
 import id.rofyfirm.pokemonapps.network.RequestApi
 import id.rofyfirm.pokemonapps.network.repository.Repository
@@ -22,10 +23,11 @@ class AppConfig: Application(), KodeinAware {
     override val kodein: Kodein = Kodein.lazy {
         import(androidXModule(this@AppConfig))
 
+        bind() from singleton { Preferences(instance()) }
         bind() from singleton { ConnectivityInterceptor(instance()) }
         bind<RequestApi>() with singleton { ApiService.getClient(instance()) }
 
-        bind() from singleton { Repository(instance()) }
+        bind() from singleton { Repository(instance(), instance()) }
         bind() from provider { MainViewModelFactory(instance())}
         bind() from provider { StatViewModelFactory(instance()) }
         bind() from provider { EvoViewModelFactory(instance()) }

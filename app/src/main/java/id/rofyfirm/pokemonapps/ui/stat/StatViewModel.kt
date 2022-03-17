@@ -22,4 +22,8 @@ class StatViewModel(private val repository: Repository): ViewModel() {
         val response = repository.fetchPokemonSpecies(id)
         speciesResponse.value = response.body()
     }
+
+    fun savePreferences (name: String, url: String) {
+        repository.savePref( name, url )
+    }
 }

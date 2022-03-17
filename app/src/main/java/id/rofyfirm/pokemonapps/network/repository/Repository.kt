@@ -1,8 +1,11 @@
 package id.rofyfirm.pokemonapps.network.repository
 
+import id.rofyfirm.pokemonapps.db.pref.Preferences
 import id.rofyfirm.pokemonapps.network.RequestApi
 
-class Repository(private val requestApi: RequestApi) {
+class Repository(
+    private val requestApi: RequestApi,
+    private val preferences: Preferences) {
 
     suspend fun fetchPokemonList() = requestApi.pokemonList()
 
@@ -10,5 +13,13 @@ class Repository(private val requestApi: RequestApi) {
 
     suspend fun fetchPokemonSpecies(id: Int) = requestApi.pokemonSpecies(id)
 
-    suspend fun fetchPokemonEvo(id: Int) = requestApi.pokemonEvo(id)
+    suspend fun fetchPokemonEvo(url: String) = requestApi.pokemonEvo(url)
+
+    fun savePref(name: String, value: String){
+        preferences.put(name, value)
+    }
+
+    fun getPref(name: String): String?{
+        return preferences.getString(name)
+    }
 }

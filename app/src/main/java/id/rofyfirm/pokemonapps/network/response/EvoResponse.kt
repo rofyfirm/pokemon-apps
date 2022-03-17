@@ -35,14 +35,9 @@ class EvoResponse {
 
     )
 
-    data class EvolvesFromSpecies (
-        @SerializedName("name" ) var name : String? = null,
-        @SerializedName("url"  ) var url  : String? = null
-    )
-
     data class EvolvesTo (
         @SerializedName("evolution_details" ) var evolutionDetails : ArrayList<EvolutionDetails> = arrayListOf(),
-        @SerializedName("evolves_to"        ) var evolvesTo        : ArrayList<String>           = arrayListOf(),
+        @SerializedName("evolves_to"        ) var evolvesTo        : ArrayList<EvolvesTo>           = arrayListOf(),
         @SerializedName("is_baby"           ) var isBaby           : Boolean?                    = null,
         @SerializedName("species"           ) var species          : Species?                    = Species()
     )
